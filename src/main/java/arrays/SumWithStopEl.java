@@ -7,7 +7,7 @@ public class SumWithStopEl {
             if (rr == el) {
                 break;
             }
-            sum+= rr;
+            sum += rr;
         }
         return sum % 2 == 0 ? sum : 0;
     }
