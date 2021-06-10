@@ -14,15 +14,23 @@ public class ActionMerge implements ActionLogic {
 
     @Override
     public boolean execute(Input input, Logic logic) {
+        System.out.println(System.lineSeparator());
         logic.printAllDbs();
-        out.println("WARNING! Merged database will be deleted!");
-        int db = input.askInt("Enter the dataBase number you willing to merge: ");
+        out.println(System.lineSeparator()
+                + "WARNING! Merged database will be deleted!"
+        + System.lineSeparator());
+        int db = input.askInt("Enter the dataBase number you willing to merge: "
+        + System.lineSeparator());
         Database dBase = StartUI.getList().get(db);
-        if (dBase != null) {
+        if  (dBase != null && !dBase.equals(logic.getDataBase())) {
             logic.mapMerge(dBase);
             StartUI.getList().remove(db);
+        } else if (dBase != null && dBase.equals(logic.getDataBase())) {
+            out.println("You can not merge current DB into itself.");
         } else {
-            out.println("Such dataBase doesn't exist.");
+            out.println(System.lineSeparator()
+                    + "Such dataBase doesn't exists."
+            + System.lineSeparator());
         }
         return true;
     }

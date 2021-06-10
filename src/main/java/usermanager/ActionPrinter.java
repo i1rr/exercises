@@ -9,7 +9,7 @@ public class ActionPrinter implements ActionLogic {
 
     @Override
     public String name() {
-        return " - Show database.";
+        return " - Show users.";
     }
 
     @Override

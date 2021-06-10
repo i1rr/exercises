@@ -22,7 +22,8 @@ public class ActionSwitchDb implements ActionLogic {
             logic.setDataBase(db);
         } else {
             out.println(System.lineSeparator()
-                    + "You entered wrong number.");
+                    + "You entered wrong number."
+            + System.lineSeparator());
         }
         return true;
     }

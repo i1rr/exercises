@@ -14,7 +14,9 @@ public class ActionNewDb implements ActionLogic {
 
     @Override
     public boolean execute(Input input, Logic logic) {
-        String name = input.askStr("Enter database name: ");
+        String name = input.askStr(System.lineSeparator()
+                + "Enter database name: "
+        + System.lineSeparator());
         if (logic.findDbByName(name) == null) {
             Database newOne = new Database(name);
             StartUI.getList().add(newOne);

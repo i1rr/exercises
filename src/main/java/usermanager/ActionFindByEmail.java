@@ -14,12 +14,16 @@ public class ActionFindByEmail implements ActionLogic {
 
     @Override
     public boolean execute(Input input, Logic logic) {
-        String email = input.askStr("e-mail: ");
+        String email = input.askStr(System.lineSeparator()
+                + "e-mail: "
+                + System.lineSeparator());
         User usr = logic.findByEmail(email);
         if (usr != null) {
             out.println("\n " + usr + "\n");
         } else {
-            out.println("No user with such email exist.");
+            out.println(System.lineSeparator()
+                    + "No user with such email exists."
+                    + System.lineSeparator());
         }
         return true;
     }

@@ -31,7 +31,7 @@ public class StartUI {
     public void init(Input input, Logic logic, List<ActionLogic> actions) {
         boolean run = true;
         while (run) {
-            out.println("=== " + logic.getDataBase().getName() + " ===");
+            out.println("YOU ARE IN : === " + logic.getDataBase().getName() + " ===");
             showMenu(actions);
             int select = input.askInt("Select: ");
             if (select < 0 || select >= actions.size()) {

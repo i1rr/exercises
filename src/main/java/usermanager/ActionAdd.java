@@ -14,15 +14,20 @@ public class ActionAdd implements ActionLogic {
 
     @Override
     public boolean execute(Input input, Logic logic) {
-        String email = input.askStr("Enter e-mail: ");
-        System.out.println();
+
+        String email = input.askStr(System.lineSeparator()
+                + "Enter e-mail: "
+        + System.lineSeparator());
         User keyUser = logic.findByEmail(email);
         if (keyUser == null) {
             String name = input.askStr("Name: ");
             User newUser = new User(name);
             logic.add(newUser, email);
+            logic.printOut();
         } else {
-            out.println("This e-mail already in use.");
+            out.println(System.lineSeparator()
+                    + "This e-mail already in use."
+                   + System.lineSeparator());
         }
         return true;
     }

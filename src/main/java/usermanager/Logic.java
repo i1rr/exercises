@@ -93,9 +93,11 @@ public class Logic {
 
     //printer
     public void printOut() {
+        System.out.println();
         for (Map.Entry<User, ArrayList<String>> entry : dataBase.getDataBase().entrySet()) {
             System.out.println(entry);
         }
+        System.out.println();
     }
 
     //find DB by name
