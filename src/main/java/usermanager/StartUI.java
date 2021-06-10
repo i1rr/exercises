@@ -47,7 +47,7 @@ public class StartUI {
 
     public static void main(String[] args) {
         Output output = new OutputConsole();
-        Input input =  new InputConsole();
+        Input input =  new InputCheck(new InputConsole(), output);
         Logic logic = Logic.getInstance();
         List<ActionLogic> actions = new ArrayList<>();
         actions.add(new ActionNewDb(output));

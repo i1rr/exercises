@@ -1,5 +1,7 @@
 package usermanager;
 
+import java.util.ArrayList;
+
 public class ActionSwitchDb implements ActionLogic {
     private final Output out;
 
@@ -17,13 +19,21 @@ public class ActionSwitchDb implements ActionLogic {
         logic.printAllDbs();
         int dbIndex = input.askInt(System.lineSeparator()
                 + "Enter database number: ");
-        Database db = StartUI.getList().get(dbIndex);
-        if (db != null) {
-            logic.setDataBase(db);
-        } else {
+        ArrayList<Database> dbList = StartUI.getList();
+        // within dbList check
+        if (dbIndex >= dbList.size() || dbIndex < 0) {
             out.println(System.lineSeparator()
-                    + "You entered wrong number."
-            + System.lineSeparator());
+                    + "Enter valid number"
+                    + System.lineSeparator());
+        } else {
+            Database db = StartUI.getList().get(dbIndex);
+            if (db != null) {
+                logic.setDataBase(db);
+            } else {
+                out.println(System.lineSeparator()
+                        + "You entered wrong number."
+                        + System.lineSeparator());
+            }
         }
         return true;
     }

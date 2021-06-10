@@ -1,5 +1,8 @@
 package usermanager;
 
+import javax.swing.plaf.synth.SynthTextAreaUI;
+import java.util.ArrayList;
+
 public class ActionMerge implements ActionLogic {
     private final Output out;
 
@@ -19,18 +22,26 @@ public class ActionMerge implements ActionLogic {
         out.println(System.lineSeparator()
                 + "WARNING! Merged database will be deleted!"
         + System.lineSeparator());
-        int db = input.askInt("Enter the dataBase number you willing to merge: "
+        int dbIndex = input.askInt("Enter the dataBase number you willing to merge: "
         + System.lineSeparator());
-        Database dBase = StartUI.getList().get(db);
-        if  (dBase != null && !dBase.equals(logic.getDataBase())) {
-            logic.mapMerge(dBase);
-            StartUI.getList().remove(db);
-        } else if (dBase != null && dBase.equals(logic.getDataBase())) {
-            out.println("You can not merge current DB into itself.");
-        } else {
+        ArrayList<Database> dbList = StartUI.getList();
+        // within dbList check
+        if (dbIndex >= dbList.size() || dbIndex < 0) {
             out.println(System.lineSeparator()
-                    + "Such dataBase doesn't exists."
+                    + "Enter valid number"
             + System.lineSeparator());
+        } else {
+            Database dBase = dbList.get(dbIndex);
+            if (dBase != null && !dBase.equals(logic.getDataBase())) {
+                logic.mapMerge(dBase);
+                StartUI.getList().remove(dbIndex);
+            } else if (dBase != null && dBase.equals(logic.getDataBase())) {
+                out.println("You can not merge current DB into itself.");
+            } else {
+                out.println(System.lineSeparator()
+                        + "Such dataBase doesn't exists."
+                        + System.lineSeparator());
+            }
         }
         return true;
     }
