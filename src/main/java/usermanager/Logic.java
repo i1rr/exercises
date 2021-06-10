@@ -24,12 +24,30 @@ public class Logic {
         return instance == null ? new Logic() : instance;
     }
 
+    //add an email to existing user
+    public void addExtraEmail(String email, String user) {
+        for (Map.Entry<User, ArrayList<String>> entry : dataBase.getDataBase().entrySet()) {
+            User usr = entry.getKey();
+            if (usr.getName().equals(user)) {
+                entry.getValue().add(email);
+            }
+        }
+    }
+
+    //print all users
+    public void printAllUsers() {
+        System.out.println(System.lineSeparator());
+        for (Map.Entry<User, ArrayList<String>> entry : dataBase.getDataBase().entrySet()) {
+            System.out.println("- " + entry.getKey().toString());
+        }
+        System.out.println(System.lineSeparator());
+    }
+
     //print DBs
     public void printAllDbs() {
         for (int i = 0; i < StartUI.getList().size(); i++) {
             System.out.println(i + ". " + StartUI.getList().get(i));
         }
-
     }
 
     //findByEmail
@@ -43,7 +61,7 @@ public class Logic {
         return null;
     }
 
-    //add
+    //addNewUser
     public boolean add(User user, String email) {
             ArrayList<String> newOne = new ArrayList<>();
             newOne.add(email);
@@ -69,6 +87,7 @@ public class Logic {
             if (!copy) {
                 dataBase.getDataBase().put(userName, emails);
             }
+            copy = false;
         }
     }
 
@@ -87,6 +106,17 @@ public class Logic {
             }
         }
         return null;
+    }
+
+    //checkIfUserExist
+    public boolean isUserExist(String name) {
+        for (Map.Entry<User, ArrayList<String>> entry : dataBase.getDataBase().entrySet()) {
+            User usr = entry.getKey();
+            if (usr.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     //copy arrays without duplicates

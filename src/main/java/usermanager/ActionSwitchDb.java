@@ -15,12 +15,14 @@ public class ActionSwitchDb implements ActionLogic {
     @Override
     public boolean execute(Input input, Logic logic) {
         logic.printAllDbs();
-        int dbIndex = input.askInt("Enter database number: ");
+        int dbIndex = input.askInt(System.lineSeparator()
+                + "Enter database number: ");
         Database db = StartUI.getList().get(dbIndex);
         if (db != null) {
             logic.setDataBase(db);
         } else {
-            out.println("You entered wrong number.");
+            out.println(System.lineSeparator()
+                    + "You entered wrong number.");
         }
         return true;
     }

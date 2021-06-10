@@ -53,6 +53,7 @@ public class StartUI {
         actions.add(new ActionNewDb(output));
         actions.add(new ActionSwitchDb(output));
         actions.add(new ActionAdd(output));
+        actions.add(new ActionAddEmail(output));
         actions.add(new ActionFindByEmail(output));
         actions.add(new ActionPrinter(output));
         actions.add(new ActionMerge(output));

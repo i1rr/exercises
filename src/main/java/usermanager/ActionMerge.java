@@ -1,7 +1,5 @@
 package usermanager;
 
-import java.util.ArrayList;
-
 public class ActionMerge implements ActionLogic {
     private final Output out;
 
