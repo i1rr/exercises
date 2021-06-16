@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class Database {
-    private final HashMap<User, ArrayList<String>> dataBase = new HashMap<>();
+public class Folder {
+    private final HashMap<User, ArrayList<String>> folder = new HashMap<>();
     private String name;
 
-    public Database(String name) {
+    public Folder(String name) {
         this.name = name;
     }
 
-    public HashMap<User, ArrayList<String>> getDataBase() {
-        return dataBase;
+    public HashMap<User, ArrayList<String>> getFolder() {
+        return folder;
     }
 
     public String getName() {
@@ -37,12 +37,12 @@ public class Database {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Database database = (Database) o;
-        return Objects.equals(dataBase, database.dataBase) && Objects.equals(name, database.name);
+        Folder folder = (Folder) o;
+        return Objects.equals(this.folder, folder.folder) && Objects.equals(this.name, folder.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dataBase, name);
+        return Objects.hash(folder, name);
     }
 }

@@ -2,46 +2,27 @@ package usermanager;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertNull;
 
 public class LogicTest {
 
     @Test
-    public void whenAndMergeAndPrintOut() {
-        Logic mer = new Logic();
-        mer.add(new User("Vasja"), "vasja@gmail.com");
-        mer.add(new User("Kolja"), "kolja@gmail.com");
-        mer.add(new User("Gleb"), "glebushka@job4j.ru");
-        ArrayList<String> emails = new ArrayList<>();
-        emails.add("kuniKing@gmail.com");
-        emails.add("vasja@gmail.com");
-        emails.add("basta@yandex.ru");
-        ArrayList<String> emails2 = new ArrayList<>();
-        emails2.add("kolja@gmail.com");
-        emails2.add("kolombo@yandex.ru");
-        emails2.add("boss@gmail.com");
-        ArrayList<String> emails3 = new ArrayList<>();
-        HashMap<User, ArrayList<String>> test = new HashMap<>();
-        test.put(new User("Gogol"), emails);
-        HashMap<User, ArrayList<String>> test2 = new HashMap<>();
-        test2.put(new User("Batja"), emails2);
-
-       // mer.mapMerge(test);
-        //mer.mapMerge(test2);
-
-        mer.printOut();
+    public void whenFindByEmailAndMerge() {
+        Logic logic = Logic.getInstance();
+        logic.add(new User("Test"), "test@test.ru");
+        logic.addExtraEmail("test2@test.ru", logic.findByEmail("test@test.ru").getName());
+        logic.add(new User("Test3"), "test3@test.ru");
+        Folder folder = new Folder("Test");
+        Logic.getFolderList().add(folder);
+        logic.setFolder(folder);
+        logic.add(new User("Gosha"), "gosha@yandex.ru");
+        logic.addExtraEmail("test@test.ru", logic.findByEmail("gosha@yandex.ru").getName());
+        logic.addExtraEmail("test3@test.ru", logic.findByEmail("gosha@yandex.ru").getName());
+        logic.add(new User("OtherOne"), "other1@one.com");
+        logic.addExtraEmail("other2@one.com", logic.findByEmail("other1@one.com").getName());
+        logic.mapMerge(Logic.getFolderList().get(0));
+        logic.printOut();
     }
-
-//    @Test
-//    public void whenAddToDataBaseAndFind() {
-//        Logic mer = new Logic();
-//        mer.add(new User("Vasja"), "vasja@gmail.com");
-//        mer.add(new User("Kolja"), "kolja@gmail.com");
-//        mer.add(new User("Gleb"), "glebushka@job4j.ru");
-//        assertThat(mer.findByEmail("kolja@gmail.com"), is("Kolja"));
-//    }
 }

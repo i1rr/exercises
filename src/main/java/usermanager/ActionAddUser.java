@@ -1,9 +1,9 @@
 package usermanager;
 
-public class ActionAdd implements ActionLogic {
+public class ActionAddUser implements ActionLogic {
     private final Output out;
 
-    public ActionAdd(Output out) {
+    public ActionAddUser(Output out) {
         this.out = out;
     }
 
@@ -21,9 +21,15 @@ public class ActionAdd implements ActionLogic {
         User keyUser = logic.findByEmail(email);
         if (keyUser == null) {
             String name = input.askStr("Name: ");
-            User newUser = new User(name);
-            logic.add(newUser, email);
-            logic.printOut();
+            if (!logic.isUserExist(name)) {
+                User newUser = new User(name);
+                logic.add(newUser, email);
+                logic.printOut();
+            } else {
+                out.println(System.lineSeparator()
+                        + "Unsuccessful. User already exists."
+                + System.lineSeparator());
+            }
         } else {
             out.println(System.lineSeparator()
                     + "This e-mail already in use."

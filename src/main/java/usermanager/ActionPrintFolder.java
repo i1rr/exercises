@@ -1,20 +1,20 @@
 package usermanager;
 
-public class ActionShowUsers implements ActionLogic {
+public class ActionPrintFolder implements ActionLogic {
     private final Output out;
 
-    public ActionShowUsers(Output out) {
+    public ActionPrintFolder(Output out) {
         this.out = out;
     }
 
     @Override
     public String name() {
-        return " - Show all users in current DB.";
+        return " - Show users in current folder.";
     }
 
     @Override
     public boolean execute(Input input, Logic logic) {
-        logic.printAllUsers();
+        logic.printOut();
         return true;
     }
 }

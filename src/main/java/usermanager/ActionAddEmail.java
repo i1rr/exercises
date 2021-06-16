@@ -16,11 +16,21 @@ public class ActionAddEmail implements ActionLogic {
     public boolean execute(Input input, Logic logic) {
         logic.printAllUsers();
         String user = input.askStr(System.lineSeparator()
-                + "Enter user name: ");
+                + "Enter username: ");
         if (logic.isUserExist(user)) {
             String email = input.askStr(System.lineSeparator()
-                    + "Enter extra email: ");
-            logic.addExtraEmail(email, user);
+                    + "Enter extra e-mail: ");
+            User usrByEmail = logic.findByEmail(email);
+            if (usrByEmail == null) {
+                logic.addExtraEmail(email, user);
+                logic.printOut();
+            } else {
+                out.println(System.lineSeparator()
+                        + "Unsuccessful. This e-mail already belongs to \""
+                        + usrByEmail.getName()
+                        + "\""
+                + System.lineSeparator());
+            }
         } else {
             System.out.println(System.lineSeparator()
                     + "User not found."

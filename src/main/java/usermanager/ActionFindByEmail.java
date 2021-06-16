@@ -9,7 +9,7 @@ public class ActionFindByEmail implements ActionLogic {
 
     @Override
     public String name() {
-        return " - Find a user by e-mail";
+        return " - Find user by e-mail";
     }
 
     @Override

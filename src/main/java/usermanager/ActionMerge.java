@@ -1,6 +1,5 @@
 package usermanager;
 
-import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.util.ArrayList;
 
 public class ActionMerge implements ActionLogic {
@@ -12,34 +11,34 @@ public class ActionMerge implements ActionLogic {
 
     @Override
     public String name() {
-        return " - Merge databases.";
+        return " - Merge folder to existing one.";
     }
 
     @Override
     public boolean execute(Input input, Logic logic) {
         System.out.println(System.lineSeparator());
-        logic.printAllDbs();
+        logic.printAllFolders();
         out.println(System.lineSeparator()
-                + "WARNING! Merged database will be deleted!"
+                + "WARNING! Merged folder will be permanently deleted!"
         + System.lineSeparator());
-        int dbIndex = input.askInt("Enter the dataBase number you willing to merge: "
+        int dbIndex = input.askInt("Enter folder number you willing to merge: "
         + System.lineSeparator());
-        ArrayList<Database> dbList = StartUI.getList();
+        ArrayList<Folder> dbList = Logic.getFolderList();
         // within dbList check
         if (dbIndex >= dbList.size() || dbIndex < 0) {
             out.println(System.lineSeparator()
                     + "Enter valid number"
             + System.lineSeparator());
         } else {
-            Database dBase = dbList.get(dbIndex);
-            if (dBase != null && !dBase.equals(logic.getDataBase())) {
-                logic.mapMerge(dBase);
-                StartUI.getList().remove(dbIndex);
-            } else if (dBase != null && dBase.equals(logic.getDataBase())) {
-                out.println("You can not merge current DB into itself.");
+            Folder dBank = dbList.get(dbIndex);
+            if (dBank != null && !dBank.equals(logic.getFolder())) {
+                logic.mapMerge(dBank);
+                Logic.getFolderList().remove(dbIndex);
+            } else if (dBank != null && dBank.equals(logic.getFolder())) {
+                out.println("You can not merge current folder into itself.");
             } else {
                 out.println(System.lineSeparator()
-                        + "Such dataBase doesn't exists."
+                        + "Such folder doesn't exists."
                         + System.lineSeparator());
             }
         }
