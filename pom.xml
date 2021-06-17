@@ -6,7 +6,7 @@
 
   <groupId>ru.job4j</groupId>
   <artifactId>UserManager</artifactId>
-  <version>0.4</version>
+  <version>0.5</version>
   <packaging>jar</packaging>
 
   <properties>
@@ -84,6 +84,53 @@
         <version>3.2.0</version>
         <configuration>
           <javadocExecutable>/Users/i1/Library/Java/JavaVirtualMachines/openjdk-15.0.2/Contents/Home/bin/javadoc</javadocExecutable>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <phase>test</phase>
+            <goals>
+              <goal>resources</goal>
+              <goal>testResources</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.2-beta-5</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+
+          <archive>
+
+            <index>true</index>
+
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass> usermanager.StartUI</mainClass>
+            </manifest>
+            <manifestEntries>
+              <mode>development</mode>
+              <url>${project.url}</url>
+            </manifestEntries>
+          </archive>
         </configuration>
       </plugin>
     </plugins>

@@ -126,7 +126,7 @@ public class Logic {
         return false;
     }
 
-    //copy emails without duplicates
+    //copy unique emails from first to second array
     private void removeDuplicates(ArrayList<String> emailListOne,
                                                ArrayList<String> emailListTwo) {
         for (String email : emailListOne) {

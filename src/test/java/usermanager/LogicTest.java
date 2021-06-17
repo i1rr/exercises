@@ -4,12 +4,11 @@ import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertNull;
 
 public class LogicTest {
 
     @Test
-    public void whenFindByEmailAndMerge() {
+    public void whenAddThenMergeAndFind() {
         Logic logic = Logic.getInstance();
         logic.add(new User("Test"), "test@test.ru");
         logic.addExtraEmail("test2@test.ru", logic.findByEmail("test@test.ru").getName());
@@ -24,5 +23,8 @@ public class LogicTest {
         logic.addExtraEmail("other2@one.com", logic.findByEmail("other1@one.com").getName());
         logic.mapMerge(Logic.getFolderList().get(0));
         logic.printOut();
+        assertThat(logic.findByEmail("test@test.ru").getName(), is("Gosha"));
+        assertThat(logic.findByEmail("test2@test.ru").getName(), is("Gosha"));
+        assertThat(logic.findByEmail("test3@test.ru").getName(), is("Gosha"));
     }
 }
